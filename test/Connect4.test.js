@@ -89,7 +89,7 @@ describe('Connect4', () => {
         connect4.selectColumn(1,1);
         connect4.selectColumn(1,1);
         connect4.selectColumn(1,1);
-        // expect(connect4.inProgress).toEqual(false);
+        expect(connect4.inProgress).toEqual(false);
         expect(connect4.checkWinnerVertically(1)).toEqual(1);
     });
 
@@ -99,8 +99,53 @@ describe('Connect4', () => {
         connect4.selectColumn(3,1);
         connect4.selectColumn(3,1);
         connect4.selectColumn(3,1);
-        // expect(connect4.inProgress).toEqual(false);
+        expect(connect4.inProgress).toEqual(false);
         expect(connect4.checkWinnerVertically(1)).toEqual(1); 
+    });
+
+    test('#checkWinnerDiagonally win + linear curve on row-0 col-3', () => {
+        const connect4 = new Connect4();
+        connect4.board = [
+            [' ', ' ', ' ', 1, ' ', ' '],
+            [' ', ' ', 1, ' ', ' ', ' '],
+            [' ', 1, ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [1, ' ', ' ', ' ', ' ', ' '],
+            [1, ' ', ' ', ' ', ' ', ' ']
+        ];
+        connect4.selectColumn(1,1);
+        expect(connect4.inProgress).toEqual(false);
+        expect(connect4.checkWinnerDiagonally(1)).toEqual(1);
+    });
+
+    test('#checkWinnerDiagonally win + linear curve on row-0 col-5', () => {
+        const connect4 = new Connect4();
+        connect4.board = [
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', 1, ' ', ' '],
+            [' ', ' ', 1, ' ', ' ', ' '],
+            [' ', 1, ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ']
+        ];
+        connect4.selectColumn(1,1);
+        expect(connect4.inProgress).toEqual(false);
+        expect(connect4.checkWinnerDiagonally(1)).toEqual(1);
+    });
+
+    test('#checkWinnerDiagonally win + linear curve on row-2 col-5', () => {
+        const connect4 = new Connect4();
+        connect4.board = [
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', 1],
+            [' ', ' ', ' ', ' ', 1, ' '],
+            [' ', ' ', ' ', 1, ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ']
+        ];
+        connect4.selectColumn(3,1);
+        expect(connect4.inProgress).toEqual(false);
+        expect(connect4.checkWinnerDiagonally(1)).toEqual(1);
     });
 
 });

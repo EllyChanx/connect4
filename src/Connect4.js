@@ -21,6 +21,7 @@ class ConnectFour {
         }
         this.checkWinnerHorizontally(player)
         this.checkWinnerVertically(player)
+        this.checkWinnerDiagonally(player)
         return this.board
     }
 
@@ -48,6 +49,22 @@ class ConnectFour {
                 this.winner = player
             } else {
                 this.winner = "no winner"
+            }
+        }
+        return this.winner
+    }
+
+    checkWinnerDiagonally(player){
+        let diagonal = []
+        for(let i = 3; i <= 5; i++){
+            for(let j = 0; j <= 2; j++) {
+                for (let row = j, col = i; row <= i; row++, col--){
+                    diagonal.push(this.board[row][col])
+                    }
+                if (diagonal.join("").includes(`${player}`.repeat(4))){
+                    this.inProgress = false
+                    this.winner = player
+                }
             }
         }
         return this.winner
