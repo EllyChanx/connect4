@@ -19,14 +19,14 @@ class ConnectFour {
                 break;
             }
         }
-        this.checkWinner()
+        this.checkWinnerHorizontally()
+        this.checkWinnerVertically()
         return this.board
     }
 
-    checkWinner(){
+    checkWinnerHorizontally(){
         for(let i = 0; i <= 5; i++ ) {
             let row = this.board[i].join("")
-            console.log(row)
             if (row.includes('1111')) {
                 this.inProgress = false
                 this.winner = 1
@@ -38,6 +38,29 @@ class ConnectFour {
             }
         }
         return this.winner 
+    }
+
+    checkWinnerVertically(){
+        let column = [];
+        let self = this;
+
+        for (let j = 0; j <= 5; j ++) {
+            for(let i = 0; i <= 5; i++){
+                column.push(self.board[i][j])
+            }
+
+            let columnString = column.join("")
+            if (columnString.includes('1111')){
+                self.inProgress = false
+                self.winner = 1
+            } else if (columnString.includes('2222')) {
+                self.inProgress = false
+                self.winner = 2
+            } else {
+                self.winner = "no winner"
+            }
+        }
+        return this.winner
     }
 }
 
