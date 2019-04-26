@@ -39,3 +39,8 @@ while (app.inProgress) {
     }
 }
 
+
+
+console.log(renderBoard(app.board));
+console.log(app.winner);
+

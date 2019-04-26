@@ -51,6 +51,36 @@ describe('Connect4', () => {
             [2, ' ', ' ', ' ', ' ', ' '],
             [1, ' ', 2, ' ', ' ', ' ']
         ]);
-
     });
+
+    test('#checkWinner check the board and find winner', () => {
+        const connect4 = new Connect4();
+        connect4.selectColumn(1,1);
+        connect4.selectColumn(2,1);
+        connect4.selectColumn(3,1);
+        connect4.selectColumn(4,1);
+        expect(connect4.inProgress).toEqual(false);
+        expect(connect4.checkWinner()).toEqual(1);
+    });
+
+    test('#checkWinner return no winner if dot not connected', () => {
+        const connect4 = new Connect4();
+        connect4.selectColumn(1,1);
+        connect4.selectColumn(2,1);
+        connect4.selectColumn(4,1);
+        connect4.selectColumn(5,1);
+        expect(connect4.inProgress).toEqual(true);
+        expect(connect4.checkWinner()).toEqual("no winner");
+    });
+
+    test('#checkWinner return the winner', () => {
+        const connect4 = new Connect4();
+        connect4.selectColumn(1,2);
+        connect4.selectColumn(2,2);
+        connect4.selectColumn(3,2);
+        connect4.selectColumn(4,2);
+        expect(connect4.inProgress).toEqual(false);
+        expect(connect4.checkWinner()).toEqual(2);
+    });
+
 });
