@@ -19,20 +19,17 @@ class ConnectFour {
                 break;
             }
         }
-        this.checkWinnerHorizontally()
-        this.checkWinnerVertically()
+        this.checkWinnerHorizontally(player)
+        this.checkWinnerVertically(player)
         return this.board
     }
 
-    checkWinnerHorizontally(){
+    checkWinnerHorizontally(player){
         for(let i = 0; i <= 5; i++ ) {
             let row = this.board[i].join("")
-            if (row.includes('1111')) {
+            if (row.includes(`${player}`.repeat(4))) {
                 this.inProgress = false
-                this.winner = 1
-            } else if (row.includes('2222')) {
-                this.inProgress = false
-                this.winner = 2
+                this.winner = player
             } else {
                 this.winner = "no winner"
             }
@@ -40,24 +37,17 @@ class ConnectFour {
         return this.winner 
     }
 
-    checkWinnerVertically(){
+    checkWinnerVertically(player){
         let column = [];
-        let self = this;
-
         for (let j = 0; j <= 5; j ++) {
             for(let i = 0; i <= 5; i++){
-                column.push(self.board[i][j])
+                column.push(this.board[i][j])
             }
-
-            let columnString = column.join("")
-            if (columnString.includes('1111')){
-                self.inProgress = false
-                self.winner = 1
-            } else if (columnString.includes('2222')) {
-                self.inProgress = false
-                self.winner = 2
+            if (column.join("").includes(`${player}`.repeat(4))){
+                this.inProgress = false
+                this.winner = player
             } else {
-                self.winner = "no winner"
+                this.winner = "no winner"
             }
         }
         return this.winner

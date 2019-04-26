@@ -60,7 +60,7 @@ describe('Connect4', () => {
         connect4.selectColumn(3,1);
         connect4.selectColumn(4,1);
         expect(connect4.inProgress).toEqual(false);
-        expect(connect4.checkWinnerHorizontally()).toEqual(1);
+        expect(connect4.checkWinnerHorizontally(1)).toEqual(1);
     });
 
     test('#checkWinnerHorizontally return no winner if dot not connected', () => {
@@ -70,7 +70,7 @@ describe('Connect4', () => {
         connect4.selectColumn(4,1);
         connect4.selectColumn(5,1);
         expect(connect4.inProgress).toEqual(true);
-        expect(connect4.checkWinnerHorizontally()).toEqual("no winner");
+        expect(connect4.checkWinnerHorizontally(1)).toEqual("no winner");
     });
 
     test('#checkWinnerHorizontally return the winner', () => {
@@ -80,17 +80,27 @@ describe('Connect4', () => {
         connect4.selectColumn(3,2);
         connect4.selectColumn(4,2);
         expect(connect4.inProgress).toEqual(false);
-        expect(connect4.checkWinnerHorizontally()).toEqual(2);
+        expect(connect4.checkWinnerHorizontally(2)).toEqual(2);
     });
 
-    test('#checkWinnerVertically return the winner', () => {
+    test('#checkWinnerVertically win at col 1 return the winner', () => {
         const connect4 = new Connect4();
         connect4.selectColumn(1,1);
         connect4.selectColumn(1,1);
         connect4.selectColumn(1,1);
         connect4.selectColumn(1,1);
-        expect(connect4.inProgress).toEqual(false);
-        expect(connect4.checkWinnerVertically()).toEqual(1);
+        // expect(connect4.inProgress).toEqual(false);
+        expect(connect4.checkWinnerVertically(1)).toEqual(1);
+    });
+
+    test('#checkWinnerVertically win at col 2 return the winner', () => {
+        const connect4 = new Connect4();
+        connect4.selectColumn(3,1);
+        connect4.selectColumn(3,1);
+        connect4.selectColumn(3,1);
+        connect4.selectColumn(3,1);
+        // expect(connect4.inProgress).toEqual(false);
+        expect(connect4.checkWinnerVertically(1)).toEqual(1); 
     });
 
 });
