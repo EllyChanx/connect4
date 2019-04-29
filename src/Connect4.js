@@ -13,8 +13,9 @@ class ConnectFour {
   }
 
   selectColumn(columnNumber, player) {
-    if (typeof columnNumber !== 'number') {throw new Error ('enter number only')}
-    if (columnNumber < 1 || columnNumber > 6) { throw new Error ('column number incorrect')}
+    if (typeof columnNumber !== 'number') throw new Error ('enter number only')
+    if (columnNumber < 1 || columnNumber > 6) throw new Error ('column number incorrect')
+    if(this.board[0][columnNumber-1] !== ' ') throw new Error ('column is full')
     for(let i = 5; i >= 0; i--) {
       if(this.board[i][columnNumber-1] === ' ') {
         this.board[i][columnNumber-1] = player;
@@ -26,7 +27,6 @@ class ConnectFour {
     this.checkWinDiagonallyAsce(player)
     this.checkWinDiagonallyDesc(player)
     this.checkDraw()
-    return this.board
   }
 
   checkWinHorizontally(player){

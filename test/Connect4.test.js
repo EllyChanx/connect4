@@ -20,7 +20,8 @@ describe('Connect4', () => {
   });
 
   test('#selectColumn take params and display on board', () => {
-    expect(connect4.selectColumn(1, 1)).toEqual([
+    connect4.selectColumn(1, 1)
+    expect(connect4.board).toEqual([
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -28,8 +29,8 @@ describe('Connect4', () => {
       [' ', ' ', ' ', ' ', ' ', ' '],
       [1, ' ', ' ', ' ', ' ', ' ']
     ]);
-
-    expect(connect4.selectColumn(1, 2)).toEqual([
+    connect4.selectColumn(1, 2)
+    expect(connect4.board).toEqual([
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -37,26 +38,10 @@ describe('Connect4', () => {
       [2, ' ', ' ', ' ', ' ', ' '],
       [1, ' ', ' ', ' ', ' ', ' ']
     ]);
-
-    expect(connect4.selectColumn(1, 1)).toEqual([
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [1, ' ', ' ', ' ', ' ', ' '],
-      [2, ' ', ' ', ' ', ' ', ' '],
-      [1, ' ', ' ', ' ', ' ', ' ']
-    ]);
-
-    expect(connect4.selectColumn(3, 2)).toEqual([
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [' ', ' ', ' ', ' ', ' ', ' '],
-      [1, ' ', ' ', ' ', ' ', ' '],
-      [2, ' ', ' ', ' ', ' ', ' '],
-      [1, ' ', 2, ' ', ' ', ' ']
-    ]);
-
-    expect(connect4.selectColumn(6, 1)).toEqual([
+    connect4.selectColumn(1, 1)
+    connect4.selectColumn(3, 2)
+    connect4.selectColumn(6, 1)
+    expect(connect4.board).toEqual([
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -76,6 +61,18 @@ describe('Connect4', () => {
     expect(() => connect4.selectColumn(true,1)).toThrow("enter number only")
     expect(() => connect4.selectColumn("abc",1)).toThrow("enter number only")
     expect(() => connect4.selectColumn([1, 2],1)).toThrow("enter number only")
+  });
+
+  test('#selectColumn - Exception: enter non-number', () => {
+    connect4.board = ([
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', ' ', ' ', ' ', ' ']
+    ]);
+    expect(() => connect4.selectColumn(1,1)).toThrow("column is full")
   });
 
   test('#checkWinHorizontally check the board and find winner', () => {
@@ -165,7 +162,7 @@ describe('Connect4', () => {
     expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinDiagonallyDesc on row-0 col-0 line ', () => {
+  test('#checkWinDiagonallyDesc on row-0 col-0 line', () => {
     connect4.board = [
       [1, ' ', ' ', ' ', ' ', ' '],
       [' ', 1, ' ', ' ', ' ', ' '],
@@ -179,7 +176,7 @@ describe('Connect4', () => {
     expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinDiagonallyDesc on row-2 col-0 line ', () => {
+  test('#checkWinDiagonallyDesc on row-2 col-0 line', () => {
     connect4.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -193,7 +190,7 @@ describe('Connect4', () => {
     expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinDiagonallyDesc on row-0 col-1 line ', () => {
+  test('#checkWinDiagonallyDesc on row-0 col-1 line', () => {
     connect4.board = [
       [' ', ' ', 1, ' ', ' ', ' '],
       [' ', ' ', ' ', 1, ' ', ' '],
