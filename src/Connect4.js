@@ -19,22 +19,21 @@ class ConnectFour {
         break;
       }
     }
-    this.checkWinnerHorizontally(player)
-    this.checkWinnerVertically(player)
+    this.checkWinHorizontally(player)
+    this.checkWinVertically(player)
     this.checkWinDiagonallyAsce(player)
     this.checkWinDiagonallyDesc(player)
     return this.board
   }
 
-  checkWinnerHorizontally(player){
+  checkWinHorizontally(player){
     for(let i = 0; i <= 5; i++ ) {
       let row = this.board[i].join("")
       row.includes(`${player}`.repeat(4))? this.setEndGame(player):false;
     }
-    return this.winner 
   }
 
-  checkWinnerVertically(player){
+  checkWinVertically(player){
     let column = [];
     for (let j = 0; j <= 5; j ++) {
       for(let i = 0; i <= 5; i++){
@@ -42,7 +41,6 @@ class ConnectFour {
       }
       column.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
     }
-    return this.winner
   }
 
   checkWinDiagonallyAsce(player){
@@ -55,7 +53,6 @@ class ConnectFour {
         diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
       }
     }
-    return this.winner
   }
 
   checkWinDiagonallyDesc(player){
