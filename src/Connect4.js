@@ -29,10 +29,13 @@ class ConnectFour {
     this.checkDraw()
   }
 
+  isConnect4(ary, player){
+    return ary.join("").includes(`${player}`.repeat(4))
+  }
+
   checkWinHorizontally(player){
     for(let i = 0; i <= 5; i++ ) {
-      let row = this.board[i].join("")
-      row.includes(`${player}`.repeat(4))? this.setEndGame(player):false;
+      this.isConnect4(this.board[i], player) ? this.setEndGame(player) : false;
     }
   }
 
@@ -42,7 +45,7 @@ class ConnectFour {
       for(let i = 0; i <= 5; i++){
         column.push(this.board[i][j])
       }
-      column.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
+      this.isConnect4(column, player) ? this.setEndGame(player) : false;
     }
   }
 
@@ -53,7 +56,7 @@ class ConnectFour {
         for (let row = j, col = i; row <= i; row++, col--){
           diagonal.push(this.board[row][col])
         }
-        diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
+        this.isConnect4(diagonal, player) ? this.setEndGame(player) : false;
       }
     }
   }
@@ -65,13 +68,13 @@ class ConnectFour {
         for(let row = k, col = h; col <= 5 && row <= 5; row++, col++){
           diagonal.push(this.board[row][col])
         }
-        diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
+        this.isConnect4(diagonal, player) ? this.setEndGame(player) : false;
       }
     }
   }
 
   checkDraw(){
-    return this.board.join("").includes(' ')? true : this.setDrawGame();
+    return this.board.join("").includes(' ') ? true : this.setDrawGame();
   }
 
   setDrawGame(){
