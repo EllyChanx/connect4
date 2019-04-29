@@ -9,7 +9,6 @@ describe('Connect4', () => {
   });
 
   test('starts with an empty board', () => {
-    console.log(connect4)
     expect(connect4.board).toEqual([
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -143,6 +142,20 @@ describe('Connect4', () => {
     connect4.selectColumn(3,1);
     expect(connect4.inProgress).toEqual(false);
     expect(connect4.checkWinnerDiagonally(1)).toEqual(1);
+  });
+
+  test('#checkWinnerDiagonally2 ', () => {
+    connect4.board = [
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [' ', 1, ' ', ' ', ' ', ' '],
+      [' ', ' ', 1, ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', 1, ' ', ' '],
+      [' ', ' ', ' ', 1, ' ', ' ']
+    ];
+    connect4.selectColumn(4,1);
+    // expect(connect4.inProgress).toEqual(false);
+    expect(connect4.checkWinnerDiagonally2(1)).toEqual(1);
   });
 
 });

@@ -50,7 +50,20 @@ class ConnectFour {
       for(let j = 0; j <= 2; j++) {
         for (let row = j, col = i; row <= i; row++, col--){
           diagonal.push(this.board[row][col])
-          }
+        }
+        diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
+      }
+    }
+    return this.winner
+  }
+
+  checkWinnerDiagonally2(player){
+    let diagonal = []
+    for(let h = 0; h <= 2; h++){
+      for(let k = 0; k <= 2; k++) {
+        for(let row = k, col = h; col <= 5 && row <= 5; row++, col++){
+          diagonal.push(this.board[row][col])
+        }
         diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
       }
     }
