@@ -9,7 +9,7 @@ class ConnectFour {
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' ']
     ];
-    this.winner;
+    this.winner = "no winner";
   }
 
   selectColumn(columnNumber, player) {
@@ -28,12 +28,7 @@ class ConnectFour {
   checkWinnerHorizontally(player){
     for(let i = 0; i <= 5; i++ ) {
       let row = this.board[i].join("")
-      if (row.includes(`${player}`.repeat(4))) {
-        this.inProgress = false
-        this.winner = player
-      } else {
-        this.winner = "no winner"
-      }
+      row.includes(`${player}`.repeat(4))? this.setEndGame(player):false;
     }
     return this.winner 
   }
@@ -44,12 +39,7 @@ class ConnectFour {
       for(let i = 0; i <= 5; i++){
         column.push(this.board[i][j])
       }
-      if (column.join("").includes(`${player}`.repeat(4))){
-        this.inProgress = false
-        this.winner = player
-      } else {
-        this.winner = "no winner"
-      }
+      column.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
     }
     return this.winner
   }
@@ -61,13 +51,15 @@ class ConnectFour {
         for (let row = j, col = i; row <= i; row++, col--){
           diagonal.push(this.board[row][col])
           }
-        if (diagonal.join("").includes(`${player}`.repeat(4))){
-          this.inProgress = false
-          this.winner = player
-        }
+        diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
       }
     }
     return this.winner
+  }
+
+  setEndGame(player){
+    this.inProgress = false
+    this.winner = player
   }
 }
 
