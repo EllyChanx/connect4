@@ -15,7 +15,7 @@ class ConnectFour {
   selectColumn(columnNumber, player) {
     if (typeof columnNumber !== 'number') {throw new Error ('enter number only')}
     if (columnNumber < 1 || columnNumber > 6) { throw new Error ('column number incorrect')}
-    for(let i = 5; i > 0; i--) {
+    for(let i = 5; i >= 0; i--) {
       if(this.board[i][columnNumber-1] === ' ') {
         this.board[i][columnNumber-1] = player;
         break;
@@ -25,6 +25,7 @@ class ConnectFour {
     this.checkWinVertically(player)
     this.checkWinDiagonallyAsce(player)
     this.checkWinDiagonallyDesc(player)
+    this.checkDraw()
     return this.board
   }
 
@@ -67,6 +68,16 @@ class ConnectFour {
         diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
       }
     }
+  }
+
+  checkDraw(){
+    return this.board.join("").includes(' ')? true : this.setDrawGame();
+  }
+
+  setDrawGame(){
+    if (!this.inProgress) { return }
+    this.inProgress = false
+    this.winner = "No One! Is Draw."
   }
 
   setEndGame(player){

@@ -55,6 +55,15 @@ describe('Connect4', () => {
       [2, ' ', ' ', ' ', ' ', ' '],
       [1, ' ', 2, ' ', ' ', ' ']
     ]);
+
+    expect(connect4.selectColumn(6, 1)).toEqual([
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [2, ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', 2, ' ', ' ', 1]
+    ]);
   });
 
   test('#selectColumn - Exception: column no. outside 1-6', () => {
@@ -192,6 +201,34 @@ describe('Connect4', () => {
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', 1],
       [' ', ' ', ' ', ' ', ' ', 1]
+    ];
+    connect4.selectColumn(6,1);
+    expect(connect4.inProgress).toEqual(false);
+    expect(connect4.winner).toEqual(1);
+  });
+
+  test('#checkDraw no spot/winner: end game and declear draw', () => {
+    connect4.board = [
+      [1, 6, 1, 6, 1, ' '],
+      [2, 5, 2, 5, 2, 5],
+      [3, 4, 3, 4, 3, 4],
+      [4, 3, 4, 3, 4, 3],
+      [5, 2, 5, 2, 5, 2],
+      [6, 1, 6, 1, 6, 1]
+    ];
+    connect4.selectColumn(6,6);
+    expect(connect4.inProgress).toEqual(false);
+    expect(connect4.winner).toEqual("No One! Is Draw.");
+  });
+
+  test('#checkDraw win from last spot: end game and not draw', () => {
+    connect4.board = [
+      [1, 6, 1, 1, 1, ' '],
+      [2, 5, 2, 5, 2, 5],
+      [3, 4, 3, 4, 3, 4],
+      [4, 3, 4, 3, 4, 3],
+      [5, 2, 5, 2, 5, 2],
+      [6, 1, 6, 1, 6, 1]
     ];
     connect4.selectColumn(6,1);
     expect(connect4.inProgress).toEqual(false);
