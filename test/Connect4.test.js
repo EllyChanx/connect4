@@ -57,7 +57,19 @@ describe('Connect4', () => {
     ]);
   });
 
-  test('#checkWinnerHorizontally check the board and find winner', () => {
+  test('#selectColumn - Exception: column no. outside 1-6', () => {
+    expect(() => connect4.selectColumn(7,1)).toThrow("column number incorrect")
+    expect(() => connect4.selectColumn(0,1)).toThrow("column number incorrect")
+    expect(() => connect4.selectColumn(-3,1)).toThrow("column number incorrect")
+  });
+
+  test('#selectColumn - Exception: enter non-number', () => {
+    expect(() => connect4.selectColumn(true,1)).toThrow("enter number only")
+    expect(() => connect4.selectColumn("abc",1)).toThrow("enter number only")
+    expect(() => connect4.selectColumn([1, 2],1)).toThrow("enter number only")
+  });
+
+  test('#checkWinHorizontally check the board and find winner', () => {
     connect4.selectColumn(1,1);
     connect4.selectColumn(2,1);
     connect4.selectColumn(3,1);
@@ -66,7 +78,7 @@ describe('Connect4', () => {
     expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinnerHorizontally return no winner if dot not connected', () => {
+  test('#checkWinHorizontally return no winner if dot not connected', () => {
     connect4.selectColumn(1,1);
     connect4.selectColumn(2,1);
     connect4.selectColumn(4,1);
@@ -75,7 +87,7 @@ describe('Connect4', () => {
     expect(connect4.winner).toEqual("no winner");
   });
 
-  test('#checkWinnerHorizontally return the winner', () => {
+  test('#checkWinHorizontally return the winner', () => {
     connect4.selectColumn(1,2);
     connect4.selectColumn(2,2);
     connect4.selectColumn(3,2);
@@ -84,7 +96,7 @@ describe('Connect4', () => {
     expect(connect4.winner).toEqual(2);
   });
 
-  test('#checkWinnerVertically win at col 1 return the winner', () => {
+  test('#checkWinVertically win at col 1 return the winner', () => {
     connect4.selectColumn(1,1);
     connect4.selectColumn(1,1);
     connect4.selectColumn(1,1);
@@ -93,7 +105,7 @@ describe('Connect4', () => {
     expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinnerVertically win at col 2 return the winner', () => {
+  test('#checkWinVertically win at col 2 return the winner', () => {
     connect4.selectColumn(3,1);
     connect4.selectColumn(3,1);
     connect4.selectColumn(3,1);

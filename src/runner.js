@@ -42,5 +42,5 @@ while (app.inProgress) {
 
 
 console.log(renderBoard(app.board));
-console.log(app.winner);
+console.log("winner: " + app.winner);
 
