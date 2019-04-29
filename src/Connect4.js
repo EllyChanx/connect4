@@ -23,10 +23,6 @@ class ConnectFour {
       }
     }
     this.checkWinHorizontally(player)
-    this.checkWinVertically(player)
-    this.checkWinDiagonallyAsce(player)
-    this.checkWinDiagonallyDesc(player)
-    this.checkDraw()
   }
 
   isConnect4(ary, player){
@@ -35,7 +31,7 @@ class ConnectFour {
 
   checkWinHorizontally(player){
     for(let i = 0; i <= 5; i++ ) {
-      this.isConnect4(this.board[i], player) ? this.setEndGame(player) : false;
+      this.isConnect4(this.board[i], player) ? this.setEndGame(player) : this.checkWinVertically(player);
     }
   }
 
@@ -45,7 +41,7 @@ class ConnectFour {
       for(let i = 0; i <= 5; i++){
         column.push(this.board[i][j])
       }
-      this.isConnect4(column, player) ? this.setEndGame(player) : false;
+      this.isConnect4(column, player) ? this.setEndGame(player) : this.checkWinDiagonallyAsce(player);
     }
   }
 
@@ -56,7 +52,7 @@ class ConnectFour {
         for (let row = j, col = i; row <= i; row++, col--){
           diagonal.push(this.board[row][col])
         }
-        this.isConnect4(diagonal, player) ? this.setEndGame(player) : false;
+        this.isConnect4(diagonal, player) ? this.setEndGame(player) : this.checkWinDiagonallyDesc(player);
       }
     }
   }
@@ -68,7 +64,7 @@ class ConnectFour {
         for(let row = k, col = h; col <= 5 && row <= 5; row++, col++){
           diagonal.push(this.board[row][col])
         }
-        this.isConnect4(diagonal, player) ? this.setEndGame(player) : false;
+        this.isConnect4(diagonal, player) ? this.setEndGame(player) : this.checkDraw();
       }
     }
   }
