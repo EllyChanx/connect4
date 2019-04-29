@@ -21,7 +21,8 @@ class ConnectFour {
     }
     this.checkWinnerHorizontally(player)
     this.checkWinnerVertically(player)
-    this.checkWinnerDiagonally(player)
+    this.checkWinDiagonallyAsce(player)
+    this.checkWinDiagonallyDesc(player)
     return this.board
   }
 
@@ -44,7 +45,7 @@ class ConnectFour {
     return this.winner
   }
 
-  checkWinnerDiagonally(player){
+  checkWinDiagonallyAsce(player){
     let diagonal = []
     for(let i = 3; i <= 5; i++){
       for(let j = 0; j <= 2; j++) {
@@ -57,7 +58,7 @@ class ConnectFour {
     return this.winner
   }
 
-  checkWinnerDiagonally2(player){
+  checkWinDiagonallyDesc(player){
     let diagonal = []
     for(let h = 0; h <= 2; h++){
       for(let k = 0; k <= 2; k++) {
@@ -67,7 +68,6 @@ class ConnectFour {
         diagonal.join("").includes(`${player}`.repeat(4))? this.setEndGame(player):false;
       }
     }
-    return this.winner
   }
 
   setEndGame(player){

@@ -102,7 +102,7 @@ describe('Connect4', () => {
     expect(connect4.checkWinnerVertically(1)).toEqual(1); 
   });
 
-  test('#checkWinnerDiagonally win + linear curve on row-0 col-3', () => {
+  test('#checkWinDiagonallyAsce on row-0 col-3 line', () => {
     connect4.board = [
       [' ', ' ', ' ', 1, ' ', ' '],
       [' ', ' ', 1, ' ', ' ', ' '],
@@ -113,10 +113,10 @@ describe('Connect4', () => {
     ];
     connect4.selectColumn(1,1);
     expect(connect4.inProgress).toEqual(false);
-    expect(connect4.checkWinnerDiagonally(1)).toEqual(1);
+    expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinnerDiagonally win + linear curve on row-0 col-5', () => {
+  test('#checkWinDiagonallyAsce on row-0 col-5 line', () => {
     connect4.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -127,10 +127,10 @@ describe('Connect4', () => {
     ];
     connect4.selectColumn(1,1);
     expect(connect4.inProgress).toEqual(false);
-    expect(connect4.checkWinnerDiagonally(1)).toEqual(1);
+    expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinnerDiagonally win + linear curve on row-2 col-5', () => {
+  test('#checkWinDiagonallyAsce on row-2 col-5 line', () => {
     connect4.board = [
       [' ', ' ', ' ', ' ', ' ', ' '],
       [' ', ' ', ' ', ' ', ' ', ' '],
@@ -141,10 +141,10 @@ describe('Connect4', () => {
     ];
     connect4.selectColumn(3,1);
     expect(connect4.inProgress).toEqual(false);
-    expect(connect4.checkWinnerDiagonally(1)).toEqual(1);
+    expect(connect4.winner).toEqual(1);
   });
 
-  test('#checkWinnerDiagonally2 ', () => {
+  test('#checkWinDiagonallyDesc on row-0 col-0 line ', () => {
     connect4.board = [
       [1, ' ', ' ', ' ', ' ', ' '],
       [' ', 1, ' ', ' ', ' ', ' '],
@@ -154,8 +154,36 @@ describe('Connect4', () => {
       [' ', ' ', ' ', 1, ' ', ' ']
     ];
     connect4.selectColumn(4,1);
-    // expect(connect4.inProgress).toEqual(false);
-    expect(connect4.checkWinnerDiagonally2(1)).toEqual(1);
+    expect(connect4.inProgress).toEqual(false);
+    expect(connect4.winner).toEqual(1);
+  });
+
+  test('#checkWinDiagonallyDesc on row-2 col-0 line ', () => {
+    connect4.board = [
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [1, ' ', ' ', ' ', ' ', ' '],
+      [' ', 1, ' ', ' ', ' ', ' '],
+      [' ', ' ', 1, ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', ' ']
+    ];
+    connect4.selectColumn(4,1);
+    expect(connect4.inProgress).toEqual(false);
+    expect(connect4.winner).toEqual(1);
+  });
+
+  test('#checkWinDiagonallyDesc on row-0 col-1 line ', () => {
+    connect4.board = [
+      [' ', ' ', 1, ' ', ' ', ' '],
+      [' ', ' ', ' ', 1, ' ', ' '],
+      [' ', ' ', ' ', ' ', 1, ' '],
+      [' ', ' ', ' ', ' ', ' ', ' '],
+      [' ', ' ', ' ', ' ', ' ', 1],
+      [' ', ' ', ' ', ' ', ' ', 1]
+    ];
+    connect4.selectColumn(6,1);
+    expect(connect4.inProgress).toEqual(false);
+    expect(connect4.winner).toEqual(1);
   });
 
 });
